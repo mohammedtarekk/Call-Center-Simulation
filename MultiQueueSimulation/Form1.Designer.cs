@@ -47,22 +47,17 @@
             this.label3 = new System.Windows.Forms.Label();
             this.selectionMethod_txt = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.servers_grid = new System.Windows.Forms.DataGridView();
-            this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.serviceDist_grid = new System.Windows.Forms.DataGridView();
-            this.serverID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.avgServTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.labl7 = new System.Windows.Forms.Label();
-            this.interarrivalDist_grid = new System.Windows.Forms.DataGridView();
             this.serviceDistServerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.serviceDistTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.serviceDistProbability = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.labl7 = new System.Windows.Forms.Label();
+            this.interarrivalDist_grid = new System.Windows.Forms.DataGridView();
+            this.ok_btn = new System.Windows.Forms.Button();
             this.InterarivalDistTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.interarrivalDistProbability = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ok_btn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.customerGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.servers_grid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.serviceDist_grid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.interarrivalDist_grid)).BeginInit();
             this.SuspendLayout();
@@ -83,11 +78,11 @@
             this.serviceEndTime,
             this.timeInQueue,
             this.serverIndex});
-            this.customerGrid.Location = new System.Drawing.Point(12, 12);
+            this.customerGrid.Location = new System.Drawing.Point(12, 189);
             this.customerGrid.Name = "customerGrid";
             this.customerGrid.ReadOnly = true;
             this.customerGrid.RowHeadersVisible = false;
-            this.customerGrid.Size = new System.Drawing.Size(902, 214);
+            this.customerGrid.Size = new System.Drawing.Size(902, 257);
             this.customerGrid.TabIndex = 0;
             // 
             // customerNo
@@ -154,7 +149,7 @@
             // 
             // noOfServers_txt
             // 
-            this.noOfServers_txt.Location = new System.Drawing.Point(102, 311);
+            this.noOfServers_txt.Location = new System.Drawing.Point(156, 46);
             this.noOfServers_txt.Name = "noOfServers_txt";
             this.noOfServers_txt.Size = new System.Drawing.Size(100, 20);
             this.noOfServers_txt.TabIndex = 1;
@@ -162,31 +157,31 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 314);
+            this.label1.Location = new System.Drawing.Point(57, 49);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 13);
+            this.label1.Size = new System.Drawing.Size(93, 13);
             this.label1.TabIndex = 2;
-            this.label1.Text = "No. of servers";
+            this.label1.Text = "Number of servers";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 342);
+            this.label2.Location = new System.Drawing.Point(57, 77);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 13);
+            this.label2.Size = new System.Drawing.Size(89, 13);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Stopping No";
+            this.label2.Text = "Stopping Number";
             // 
             // stoppingNo_txt
             // 
-            this.stoppingNo_txt.Location = new System.Drawing.Point(102, 339);
+            this.stoppingNo_txt.Location = new System.Drawing.Point(156, 74);
             this.stoppingNo_txt.Name = "stoppingNo_txt";
             this.stoppingNo_txt.Size = new System.Drawing.Size(100, 20);
             this.stoppingNo_txt.TabIndex = 3;
             // 
             // stoppingCriteria_txt
             // 
-            this.stoppingCriteria_txt.Location = new System.Drawing.Point(102, 365);
+            this.stoppingCriteria_txt.Location = new System.Drawing.Point(156, 100);
             this.stoppingCriteria_txt.Name = "stoppingCriteria_txt";
             this.stoppingCriteria_txt.Size = new System.Drawing.Size(100, 20);
             this.stoppingCriteria_txt.TabIndex = 3;
@@ -194,15 +189,15 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 368);
+            this.label3.Location = new System.Drawing.Point(57, 103);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(81, 13);
+            this.label3.Size = new System.Drawing.Size(84, 13);
             this.label3.TabIndex = 4;
-            this.label3.Text = "StoppingCriteria";
+            this.label3.Text = "Stopping Criteria";
             // 
             // selectionMethod_txt
             // 
-            this.selectionMethod_txt.Location = new System.Drawing.Point(102, 391);
+            this.selectionMethod_txt.Location = new System.Drawing.Point(156, 126);
             this.selectionMethod_txt.Name = "selectionMethod_txt";
             this.selectionMethod_txt.Size = new System.Drawing.Size(100, 20);
             this.selectionMethod_txt.TabIndex = 3;
@@ -210,37 +205,16 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 394);
+            this.label4.Location = new System.Drawing.Point(57, 129);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(87, 13);
+            this.label4.Size = new System.Drawing.Size(90, 13);
             this.label4.TabIndex = 4;
-            this.label4.Text = "SelectionMethod";
-            // 
-            // servers_grid
-            // 
-            this.servers_grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.servers_grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.serverID,
-            this.avgServTime});
-            this.servers_grid.Location = new System.Drawing.Point(209, 284);
-            this.servers_grid.Name = "servers_grid";
-            this.servers_grid.RowHeadersVisible = false;
-            this.servers_grid.Size = new System.Drawing.Size(212, 150);
-            this.servers_grid.TabIndex = 5;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(206, 268);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(43, 13);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Servers";
+            this.label4.Text = "Selection Method";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(446, 268);
+            this.label6.Location = new System.Drawing.Point(323, 6);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(95, 13);
             this.label6.TabIndex = 8;
@@ -253,42 +227,11 @@
             this.serviceDistServerID,
             this.serviceDistTime,
             this.serviceDistProbability});
-            this.serviceDist_grid.Location = new System.Drawing.Point(427, 284);
+            this.serviceDist_grid.Location = new System.Drawing.Point(326, 22);
             this.serviceDist_grid.Name = "serviceDist_grid";
             this.serviceDist_grid.RowHeadersVisible = false;
             this.serviceDist_grid.Size = new System.Drawing.Size(273, 150);
             this.serviceDist_grid.TabIndex = 7;
-            // 
-            // serverID
-            // 
-            this.serverID.HeaderText = "ServerID";
-            this.serverID.Name = "serverID";
-            // 
-            // avgServTime
-            // 
-            this.avgServTime.HeaderText = "AVG Service Time";
-            this.avgServTime.Name = "avgServTime";
-            // 
-            // labl7
-            // 
-            this.labl7.AutoSize = true;
-            this.labl7.Location = new System.Drawing.Point(703, 268);
-            this.labl7.Name = "labl7";
-            this.labl7.Size = new System.Drawing.Size(108, 13);
-            this.labl7.TabIndex = 12;
-            this.labl7.Text = "InterarrivalDistribution";
-            // 
-            // interarrivalDist_grid
-            // 
-            this.interarrivalDist_grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.interarrivalDist_grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.InterarivalDistTime,
-            this.interarrivalDistProbability});
-            this.interarrivalDist_grid.Location = new System.Drawing.Point(706, 284);
-            this.interarrivalDist_grid.Name = "interarrivalDist_grid";
-            this.interarrivalDist_grid.RowHeadersVisible = false;
-            this.interarrivalDist_grid.Size = new System.Drawing.Size(208, 150);
-            this.interarrivalDist_grid.TabIndex = 11;
             // 
             // serviceDistServerID
             // 
@@ -306,38 +249,59 @@
             this.serviceDistProbability.HeaderText = "Probablity";
             this.serviceDistProbability.Name = "serviceDistProbability";
             // 
+            // labl7
+            // 
+            this.labl7.AutoSize = true;
+            this.labl7.Location = new System.Drawing.Point(616, 6);
+            this.labl7.Name = "labl7";
+            this.labl7.Size = new System.Drawing.Size(108, 13);
+            this.labl7.TabIndex = 12;
+            this.labl7.Text = "InterarrivalDistribution";
+            // 
+            // interarrivalDist_grid
+            // 
+            this.interarrivalDist_grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.interarrivalDist_grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.InterarivalDistTime,
+            this.interarrivalDistProbability});
+            this.interarrivalDist_grid.Location = new System.Drawing.Point(619, 22);
+            this.interarrivalDist_grid.Name = "interarrivalDist_grid";
+            this.interarrivalDist_grid.RowHeadersVisible = false;
+            this.interarrivalDist_grid.Size = new System.Drawing.Size(295, 150);
+            this.interarrivalDist_grid.TabIndex = 11;
+            // 
+            // ok_btn
+            // 
+            this.ok_btn.Location = new System.Drawing.Point(391, 463);
+            this.ok_btn.Name = "ok_btn";
+            this.ok_btn.Size = new System.Drawing.Size(151, 43);
+            this.ok_btn.TabIndex = 13;
+            this.ok_btn.Text = "GO";
+            this.ok_btn.UseVisualStyleBackColor = true;
+            this.ok_btn.Click += new System.EventHandler(this.ok_btn_Click);
+            // 
             // InterarivalDistTime
             // 
             this.InterarivalDistTime.HeaderText = "Time";
             this.InterarivalDistTime.Name = "InterarivalDistTime";
+            this.InterarivalDistTime.Width = 150;
             // 
             // interarrivalDistProbability
             // 
             this.interarrivalDistProbability.HeaderText = "Probability";
             this.interarrivalDistProbability.Name = "interarrivalDistProbability";
-            // 
-            // ok_btn
-            // 
-            this.ok_btn.Location = new System.Drawing.Point(390, 452);
-            this.ok_btn.Name = "ok_btn";
-            this.ok_btn.Size = new System.Drawing.Size(151, 43);
-            this.ok_btn.TabIndex = 13;
-            this.ok_btn.Text = "OK";
-            this.ok_btn.UseVisualStyleBackColor = true;
-            this.ok_btn.Click += new System.EventHandler(this.ok_btn_Click);
+            this.interarrivalDistProbability.Width = 140;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(926, 507);
+            this.ClientSize = new System.Drawing.Size(926, 518);
             this.Controls.Add(this.ok_btn);
             this.Controls.Add(this.labl7);
             this.Controls.Add(this.interarrivalDist_grid);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.serviceDist_grid);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.servers_grid);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
@@ -347,12 +311,11 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.noOfServers_txt);
             this.Controls.Add(this.customerGrid);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.customerGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.servers_grid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.serviceDist_grid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.interarrivalDist_grid)).EndInit();
             this.ResumeLayout(false);
@@ -381,20 +344,16 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox selectionMethod_txt;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridView servers_grid;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataGridView serviceDist_grid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn serverID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn avgServTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn serviceDistServerID;
         private System.Windows.Forms.DataGridViewTextBoxColumn serviceDistTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn serviceDistProbability;
         private System.Windows.Forms.Label labl7;
         private System.Windows.Forms.DataGridView interarrivalDist_grid;
+        private System.Windows.Forms.Button ok_btn;
         private System.Windows.Forms.DataGridViewTextBoxColumn InterarivalDistTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn interarrivalDistProbability;
-        private System.Windows.Forms.Button ok_btn;
     }
 }
 

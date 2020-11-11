@@ -14,8 +14,6 @@ namespace MultiQueueModels
             this.InterarrivalDistribution = new List<TimeDistribution>();
             this.PerformanceMeasures = new PerformanceMeasures();
             this.SimulationTable = new List<SimulationCase>();
-
-            assignServer();
         }
 
         ///////////// INPUTS ///////////// 
@@ -26,30 +24,10 @@ namespace MultiQueueModels
         public Enums.StoppingCriteria StoppingCriteria { get; set; }
         public Enums.SelectionMethod SelectionMethod { get; set; }
 
-        ///////////// IMPLEMENTATION /////////////
         public string selectionMethod = null;
         public string stoppingCase = null;
-
-        public void assignServer()
-        {
-            ///// TODO
-            //NumberOfServers = 2;
-            //StoppingNumber = 100;
-            //Server s1 = new Server();
-            //s1.ID = 1;
-
-            //Server s2 = new Server();
-            //s2.ID = 2;
-            //Servers = [s1, s2];
-            //s2.TimeDistribution = 
-            ////InterarrivalDistribution
-            //StoppingCriteria = Enums.StoppingCriteria.NumberOfCustomers;
-            //SelectionMethod = Enums.SelectionMethod.Random;
-
-        }
-
-
-
+        public int HP = 0;
+ 
         ///////////// OUTPUTS /////////////
         public List<SimulationCase> SimulationTable { get; set; }
         public PerformanceMeasures PerformanceMeasures { get; set; }

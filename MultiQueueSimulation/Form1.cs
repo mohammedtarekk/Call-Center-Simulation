@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,6 +16,7 @@ namespace MultiQueueSimulation
     public partial class Form1 : Form
     {
         SimulationSystem sys = new SimulationSystem();
+        SimulationCase row;
 
         public Form1()
         {
@@ -29,8 +31,12 @@ namespace MultiQueueSimulation
         private void ok_btn_Click(object sender, EventArgs e)
         {
             try
-            {
-                // map stopping case
+            {                
+
+                sys.NumberOfServers = Convert.ToInt32(noOfServers_txt.Text);
+                sys.StoppingNumber = Convert.ToInt32(stoppingNo_txt.Text);
+
+                // map stopping criteria
                 List<KeyValuePair<string, int>> StoppingCriteriaList = GetEnumList<Enums.StoppingCriteria>();
                 int x = Convert.ToInt32(stoppingCriteria_txt.Text);
                 foreach (var val in StoppingCriteriaList)
@@ -54,42 +60,36 @@ namespace MultiQueueSimulation
                     }
                 }
 
-                // map another data
-                sys.NumberOfServers = Convert.ToInt32(noOfServers_txt.Text);
-                sys.StoppingNumber = Convert.ToInt32(stoppingNo_txt.Text);
-
                 // servers data
                 Server server;
-                for(int i = 0; i < sys.NumberOfServers; i++)
+                for (int i = 0; i < sys.NumberOfServers; i++)
                 {
                     server = new Server();
-                    server.ID = Convert.ToInt32(servers_grid.Rows[i].Cells[0].Value.ToString());
-                    server.AverageServiceTime = Convert.ToInt32(servers_grid.Rows[i].Cells[1].Value.ToString());
+                    server.ID = i + 1;
                     sys.Servers.Add(server);
-
-                    serviceDist_grid.Rows.Add(server.ID, null, null);
                 }
 
                 // service distribution
                 TimeDistribution serverTimeDist;
-                for (int i = 0; i < sys.NumberOfServers; i++)
+                int count = serviceDist_grid.Rows.Count - 1;
+                for (int i = 0; i < count; i++)
                 {
                     serverTimeDist = new TimeDistribution();
-                    serverTimeDist.Time = Convert.ToInt32(serviceDist_grid.Rows[i].Cells[0].Value.ToString());
-                    serverTimeDist.Probability = Convert.ToInt32(serviceDist_grid.Rows[i].Cells[1].Value.ToString());
+                    serverTimeDist.Time = Convert.ToInt32(serviceDist_grid.Rows[i].Cells[1].Value);
+                    serverTimeDist.Probability = Convert.ToDecimal(serviceDist_grid.Rows[i].Cells[2].Value);
 
-                    sys.Servers[i].TimeDistribution.Add(serverTimeDist);
+                    int current = Convert.ToInt32(serviceDist_grid.Rows[i].Cells[0].Value.ToString());
+                    sys.Servers[current - 1].TimeDistribution.Add(serverTimeDist);
                 }
 
-
                 // interarrival distribution
-                int numOfInterarrivals = interarrivalDist_grid.Rows.Count;
+                int numOfInterarrivals = interarrivalDist_grid.Rows.Count - 1;
                 TimeDistribution interarrivalDist;
                 for (int i = 0; i < numOfInterarrivals; i++)
                 {
                     interarrivalDist = new TimeDistribution();
                     interarrivalDist.Time = Convert.ToInt32(interarrivalDist_grid.Rows[i].Cells[0].Value.ToString());
-                    interarrivalDist.Probability = Convert.ToInt32(interarrivalDist_grid.Rows[i].Cells[0].Value.ToString());
+                    interarrivalDist.Probability = Convert.ToDecimal(interarrivalDist_grid.Rows[i].Cells[1].Value.ToString());
 
                     sys.InterarrivalDistribution.Add(interarrivalDist);
                 }
@@ -97,15 +97,8 @@ namespace MultiQueueSimulation
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                MessageBox.Show(ex.Message);
             }
-
-
-
-            /*
-            var es = Enum.GetValues(typeof(Enums.StoppingCriteria));
-            Console.WriteLine(es.GetValue(1));
-            Console.WriteLine((int)es.GetValue(1));*/
 
         }
 
@@ -118,6 +111,5 @@ namespace MultiQueueSimulation
             }
             return list;
         }
-
     }
 }

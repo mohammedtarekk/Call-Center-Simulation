@@ -97,3 +97,4 @@ E:\College\Forth Year\Modeling and Simulation\Tasks\Task 1\Template_Students\Mul
 E:\College\Forth Year\Modeling and Simulation\Tasks\Task 1\Template_Students\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.csproj.CopyComplete
 E:\College\Forth Year\Modeling and Simulation\Tasks\Task 1\Template_Students\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.exe
 E:\College\Forth Year\Modeling and Simulation\Tasks\Task 1\Template_Students\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.pdb
+E:\College\Forth Year\Modeling and Simulation\Tasks\Task 1\Template_Students\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.Form2.resources

@@ -15,10 +15,10 @@ namespace MultiQueueSimulation
 {
     public partial class Form1 : Form
     {
-        SimulationSystem sys = new SimulationSystem();
+        public static SimulationSystem sys;
         SimulationCase row;
         int customersCount = 0;
-        Random rand = new Random();
+        Random rand;
 
         public Form1()
         {
@@ -34,6 +34,11 @@ namespace MultiQueueSimulation
         {
             try
             {
+                sys = new SimulationSystem();
+                customersCount = 0;
+                rand = new Random();
+                customerGrid.Rows.Clear();
+
                 initialize_inputs();
                 start_process();
             }
@@ -41,7 +46,6 @@ namespace MultiQueueSimulation
             {
                 MessageBox.Show(ex.Message);
             }
-
         }
 
         public List<KeyValuePair<string, int>> GetEnumList<T>()
@@ -126,7 +130,19 @@ namespace MultiQueueSimulation
 
         public void start_process()
         {
-            while(customersCount < sys.StoppingNumber)
+            ///////////////// testing /////////////////
+            int[] ra = { -1, 26, 98, 90, 26, 42, 74, 80, 68, 22 }; int cra = 0;
+            int[] ia = { -1, 2, 4, 4, 2, 2, 3, 3, 3, 1 }; int cia = 0;
+            int[] rs = { 95, 21, 51, 92, 89, 38, 13, 61, 50, 49 }; int crs = 0;
+            int[] st = { 5, 3, 3, 5, 6, 3, 2, 4, 4, 3 }; int cst = 0;
+            ///////////////////////////////////////////
+
+            int lastEndTime = 0;
+            int maxQueueLength = 0;
+            int totalWaitingTime = 0;
+            int NoOfCustomerWhoWaited = 0;
+
+            while ((sys.stoppingCase == "NumberOfCustomers" && customersCount < sys.StoppingNumber) | (sys.stoppingCase == "SimulationEndTime" && lastEndTime < sys.StoppingNumber))
             {
                 // generate a new customer
                 row = new SimulationCase();
@@ -139,15 +155,18 @@ namespace MultiQueueSimulation
                         row.AssignedServer = sys.Servers[sys.HP];
                     else
                     {
-                        int random = rand.Next(0, sys.Servers.Count - 1);
+                        int random = rand.Next(0, sys.Servers.Count);
                         row.AssignedServer = sys.Servers[random];
                     }
                     row.RandomInterArrival = 1;
+
                 }
                 else // the rest of the customers
                 {
-                    row.RandomInterArrival = rand.Next(1, 100);
-                    row.InterArrival = get_Range(sys.InterarrivalDistribution, row.RandomInterArrival);
+                    //row.RandomInterArrival = rand.Next(1, 101);
+                    //row.InterArrival = get_Range(sys.InterarrivalDistribution, row.RandomInterArrival);
+                    row.RandomInterArrival = ra[cra]; // testing
+                    row.InterArrival = ia[cia]; // testing
                     row.ArrivalTime = sys.SimulationTable[customersCount - 1].ArrivalTime + row.InterArrival;
 
                     // assign server
@@ -168,11 +187,11 @@ namespace MultiQueueSimulation
                             }
 
                             // in case there is no idle servers
-                            if (row.AssignedServer == null)
+                            if (row.AssignedServer.ID == 0)
                             {
                                 // select server with minimum end time
                                 int min = sys.Servers[0].currentEnd;
-                                int server_id = 0;
+                                int server_id = 1;
                                 foreach (var server in sys.Servers)
                                 {
                                     if (server.currentEnd < min)
@@ -183,32 +202,35 @@ namespace MultiQueueSimulation
                                 }
 
                                 // pass to the waiting queue
-                                row.AssignedServer = sys.Servers[server_id];
+                                row.AssignedServer = sys.Servers[server_id - 1];
                                 row.TimeInQueue = row.AssignedServer.currentEnd - row.ArrivalTime;
+
+                                // performance
+                                NoOfCustomerWhoWaited++;
+                                totalWaitingTime += row.TimeInQueue;
+                                if (row.TimeInQueue > maxQueueLength)
+                                    maxQueueLength = row.TimeInQueue;
                             }
                         }
                     }
                     else // random server
                     {
                         // search for a random idle server
-                        int random;
-                        bool found_idle = false;
-                        while (!found_idle)
+                        for(int i = sys.Servers.Count - 1; i >= 0; i--)
                         {
-                            random = rand.Next(0, sys.Servers.Count - 1);
-                            if (row.ArrivalTime >= sys.Servers[random].currentEnd)
+                            if (row.ArrivalTime >= sys.Servers[i].currentEnd)
                             {
-                                row.AssignedServer = sys.Servers[random];
-                                found_idle = true;
+                                row.AssignedServer = sys.Servers[i];
+                                break;
                             }
                         }
 
                         // in case there is no idle servers
-                        if (row.AssignedServer == null)
+                        if (row.AssignedServer.ID == 0)
                         {
                             // select server with minimum end time
                             int min = sys.Servers[0].currentEnd;
-                            int server_id = 0;
+                            int server_id = 1;
                             foreach (var server in sys.Servers)
                             {
                                 if (server.currentEnd < min)
@@ -219,33 +241,65 @@ namespace MultiQueueSimulation
                             }
 
                             // pass to the waiting queue
-                            row.AssignedServer = sys.Servers[server_id];
+                            row.AssignedServer = sys.Servers[server_id - 1];
                             row.TimeInQueue = row.AssignedServer.currentEnd - row.ArrivalTime;
+
+                            // performance
+                            NoOfCustomerWhoWaited++;
+                            totalWaitingTime += row.TimeInQueue;
+                            if (row.TimeInQueue > maxQueueLength)
+                                maxQueueLength = row.TimeInQueue;
                         }
                     }
 
                 }
 
-                row.RandomService = rand.Next(1, 100);
-                row.ServiceTime = get_Range(row.AssignedServer.TimeDistribution, row.RandomService);
+                //row.RandomService = rand.Next(1, 101);
+                //row.ServiceTime = get_Range(row.AssignedServer.TimeDistribution, row.RandomService);
+                row.RandomService = rs[crs]; // testing
+                row.ServiceTime = st[cst]; // testing
                 row.StartTime = row.ArrivalTime + row.TimeInQueue;
                 row.EndTime = row.ServiceTime + row.StartTime;
-                sys.Servers[row.AssignedServer.ID].currentEnd = row.EndTime;
+                sys.Servers[row.AssignedServer.ID - 1].currentEnd = row.EndTime;
+                lastEndTime = row.EndTime;
 
-                // add this customer to simulation table
-                sys.SimulationTable.Add(row);
 
-                // update data grid view
-                customerGrid.Rows.Add(customersCount + 1, row.RandomInterArrival, row.InterArrival, row.ArrivalTime, row.RandomService, row.StartTime, row.ServiceTime, row.EndTime, row.TimeInQueue, row.AssignedServer.ID);
+                if (sys.stoppingCase == "NumberOfCustomers" | (sys.stoppingCase == "SimulationEndTime" && lastEndTime <= sys.StoppingNumber))
+                {
+                    // update data grid view
+                    customerGrid.Rows.Add(customersCount + 1, row.RandomInterArrival, row.InterArrival, row.ArrivalTime, row.RandomService, row.StartTime, row.ServiceTime, row.EndTime, row.TimeInQueue, row.AssignedServer.ID);
 
-                customersCount++;
+                    // add this customer to simulation table
+                    sys.SimulationTable.Add(row);
+
+                    customersCount++;
+                }
+                else 
+                    return;
+                    
+
+                crs++; // testing
+                cst++; // testing
+                cia++; // testing
+                cra++; // testing
             }
+
+            // set performance measuers
+            sys.PerformanceMeasures.MaxQueueLength = maxQueueLength;
+            sys.PerformanceMeasures.AverageWaitingTime = (decimal)totalWaitingTime / customersCount;
+            sys.PerformanceMeasures.WaitingProbability = (decimal)NoOfCustomerWhoWaited / customersCount;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             string result = TestingManager.Test(sys, Constants.FileNames.TestCase1);
             MessageBox.Show(result);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Form2 f2 = new Form2();
+            f2.Show();            
         }
     }
 }

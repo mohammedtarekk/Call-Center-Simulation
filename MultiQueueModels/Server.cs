@@ -12,6 +12,8 @@ namespace MultiQueueModels
         {
             this.TimeDistribution = new List<TimeDistribution>();
             this.currentEnd = 0;
+            this.noOfCustomers = 0;
+            this.totalServiceTime = 0;
         }
 
         public int ID { get; set; }
@@ -21,7 +23,9 @@ namespace MultiQueueModels
 
         public List<TimeDistribution> TimeDistribution;
 
-        public int currentEnd; 
+        public int currentEnd;
+        public int noOfCustomers;
+        public int totalServiceTime;
 
         //optional if needed use them
         public int FinishTime { get; set; }

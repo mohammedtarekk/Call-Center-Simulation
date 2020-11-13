@@ -54,11 +54,11 @@
             this.serviceDistProbability = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labl7 = new System.Windows.Forms.Label();
             this.interarrivalDist_grid = new System.Windows.Forms.DataGridView();
-            this.InterarivalDistTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.interarrivalDistProbability = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ok_btn = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.InterarivalDistTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.interarrivalDistProbability = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.customerGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.serviceDist_grid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.interarrivalDist_grid)).BeginInit();
@@ -216,7 +216,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(323, 6);
+            this.label6.Location = new System.Drawing.Point(297, 6);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(95, 13);
             this.label6.TabIndex = 8;
@@ -229,10 +229,9 @@
             this.serviceDistServerID,
             this.serviceDistTime,
             this.serviceDistProbability});
-            this.serviceDist_grid.Location = new System.Drawing.Point(326, 22);
+            this.serviceDist_grid.Location = new System.Drawing.Point(298, 22);
             this.serviceDist_grid.Name = "serviceDist_grid";
-            this.serviceDist_grid.RowHeadersVisible = false;
-            this.serviceDist_grid.Size = new System.Drawing.Size(273, 150);
+            this.serviceDist_grid.Size = new System.Drawing.Size(313, 150);
             this.serviceDist_grid.TabIndex = 7;
             // 
             // serviceDistServerID
@@ -254,7 +253,7 @@
             // labl7
             // 
             this.labl7.AutoSize = true;
-            this.labl7.Location = new System.Drawing.Point(616, 6);
+            this.labl7.Location = new System.Drawing.Point(629, 6);
             this.labl7.Name = "labl7";
             this.labl7.Size = new System.Drawing.Size(108, 13);
             this.labl7.TabIndex = 12;
@@ -266,23 +265,10 @@
             this.interarrivalDist_grid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.InterarivalDistTime,
             this.interarrivalDistProbability});
-            this.interarrivalDist_grid.Location = new System.Drawing.Point(619, 22);
+            this.interarrivalDist_grid.Location = new System.Drawing.Point(631, 22);
             this.interarrivalDist_grid.Name = "interarrivalDist_grid";
-            this.interarrivalDist_grid.RowHeadersVisible = false;
-            this.interarrivalDist_grid.Size = new System.Drawing.Size(295, 150);
+            this.interarrivalDist_grid.Size = new System.Drawing.Size(283, 150);
             this.interarrivalDist_grid.TabIndex = 11;
-            // 
-            // InterarivalDistTime
-            // 
-            this.InterarivalDistTime.HeaderText = "Time";
-            this.InterarivalDistTime.Name = "InterarivalDistTime";
-            this.InterarivalDistTime.Width = 150;
-            // 
-            // interarrivalDistProbability
-            // 
-            this.interarrivalDistProbability.HeaderText = "Probability";
-            this.interarrivalDistProbability.Name = "interarrivalDistProbability";
-            this.interarrivalDistProbability.Width = 140;
             // 
             // ok_btn
             // 
@@ -313,6 +299,17 @@
             this.button2.Text = "Measure Performance";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // InterarivalDistTime
+            // 
+            this.InterarivalDistTime.HeaderText = "Time";
+            this.InterarivalDistTime.Name = "InterarivalDistTime";
+            // 
+            // interarrivalDistProbability
+            // 
+            this.interarrivalDistProbability.HeaderText = "Probability";
+            this.interarrivalDistProbability.Name = "interarrivalDistProbability";
+            this.interarrivalDistProbability.Width = 140;
             // 
             // Form1
             // 
@@ -376,10 +373,10 @@
         private System.Windows.Forms.Label labl7;
         private System.Windows.Forms.DataGridView interarrivalDist_grid;
         private System.Windows.Forms.Button ok_btn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn InterarivalDistTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn interarrivalDistProbability;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn InterarivalDistTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn interarrivalDistProbability;
     }
 }
 

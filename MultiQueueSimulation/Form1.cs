@@ -27,7 +27,6 @@ namespace MultiQueueSimulation
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
         }
 
         private void ok_btn_Click(object sender, EventArgs e)
@@ -58,9 +57,20 @@ namespace MultiQueueSimulation
             return list;
         }
 
+        /// <summary>
+        /// gets the interarrival time of a given number buy checking its comulative prob range.
+        /// </summary>
+        /// <param name="t">Time Distribution List</param>
+        /// <param name="n">The Random Digit</param>
+        /// <returns>Interarrival time</returns>
         public int get_Range(List<TimeDistribution> t, int n)
         {
             // TODO
+            foreach (TimeDistribution timeDistribution in t)
+            {
+                if (n <= timeDistribution.MaxRange && n >= timeDistribution.MinRange)
+                    return timeDistribution.Time;
+            }
             return 0;
         }
 
@@ -126,22 +136,18 @@ namespace MultiQueueSimulation
 
                 sys.InterarrivalDistribution.Add(interarrivalDist);
             }
+
+            sys.CalculateCummProbabilty();
         }
 
         public void start_process()
         {
-            ///////////////// testing /////////////////
-            int[] ra = { -1, 26, 98, 90, 26, 42, 74, 80, 68, 22 }; int cra = 0;
-            int[] ia = { -1, 2, 4, 4, 2, 2, 3, 3, 3, 1 }; int cia = 0;
-            int[] rs = { 95, 21, 51, 92, 89, 38, 13, 61, 50, 49 }; int crs = 0;
-            int[] st = { 5, 3, 3, 5, 6, 3, 2, 4, 4, 3 }; int cst = 0;
-            ///////////////////////////////////////////
-
             int lastEndTime = 0;
             int maxQueueLength = 0;
             int totalWaitingTime = 0;
             int totalSimulationTime = 0;
             int NoOfCustomerWhoWaited = 0;
+            List<SimulationCase> queue = new List<SimulationCase>();
 
             while ((sys.stoppingCase == "NumberOfCustomers" && customersCount < sys.StoppingNumber) | (sys.stoppingCase == "SimulationEndTime" && lastEndTime < sys.StoppingNumber))
             {
@@ -164,10 +170,8 @@ namespace MultiQueueSimulation
                 }
                 else // the rest of the customers
                 {
-                    //row.RandomInterArrival = rand.Next(1, 101);
-                    //row.InterArrival = get_Range(sys.InterarrivalDistribution, row.RandomInterArrival);
-                    row.RandomInterArrival = ra[cra]; // testing
-                    row.InterArrival = ia[cia]; // testing
+                    row.RandomInterArrival = rand.Next(1, 101);
+                    row.InterArrival = get_Range(sys.InterarrivalDistribution, row.RandomInterArrival);
                     row.ArrivalTime = sys.SimulationTable[customersCount - 1].ArrivalTime + row.InterArrival;
 
                     // assign server
@@ -209,9 +213,9 @@ namespace MultiQueueSimulation
                                 // performance calculations
                                 NoOfCustomerWhoWaited++;
                                 totalWaitingTime += row.TimeInQueue;
-                                if (row.TimeInQueue > maxQueueLength)
-                                    maxQueueLength = row.TimeInQueue;
+
                                 //sys.Servers[server_id - 1].IdleProbability += row.TimeInQueue;
+
                             }
                         }
                     }
@@ -249,24 +253,23 @@ namespace MultiQueueSimulation
                             // performance calculations
                             NoOfCustomerWhoWaited++;
                             totalWaitingTime += row.TimeInQueue;
-                            if (row.TimeInQueue > maxQueueLength)
-                                maxQueueLength = row.TimeInQueue;
+
                             //sys.Servers[server_id - 1].IdleProbability += row.TimeInQueue;
+
                             
                         }
                     }
 
                 }
 
-                //row.RandomService = rand.Next(1, 101);
-                //row.ServiceTime = get_Range(row.AssignedServer.TimeDistribution, row.RandomService);
-                row.RandomService = rs[crs]; // testing
-                row.ServiceTime = st[cst]; // testing
+                row.RandomService = rand.Next(1, 101);
+                row.ServiceTime = get_Range(row.AssignedServer.TimeDistribution, row.RandomService);
                 row.StartTime = row.ArrivalTime + row.TimeInQueue;
                 row.EndTime = row.ServiceTime + row.StartTime;
                 sys.Servers[row.AssignedServer.ID - 1].currentEnd = row.EndTime;
                 lastEndTime = row.EndTime;
 
+                
 
                 if (sys.stoppingCase == "NumberOfCustomers" | (sys.stoppingCase == "SimulationEndTime" && lastEndTime <= sys.StoppingNumber))
                 {
@@ -274,6 +277,21 @@ namespace MultiQueueSimulation
                     sys.Servers[row.AssignedServer.ID - 1].totalServiceTime += row.ServiceTime;
                     sys.Servers[row.AssignedServer.ID - 1].noOfCustomers++;
                     totalSimulationTime = lastEndTime;
+
+                    // this code is to calculate maximum queue length
+                    if (row.TimeInQueue > 0)
+                    {
+                        queue.Add(row);
+
+                        for (int i = 0; i < queue.Count; i++)
+                        {
+                            if (queue[queue.Count - 1].ArrivalTime >= queue[i].StartTime)
+                                queue.Remove(queue[i]);
+                        }
+
+                        if (queue.Count > maxQueueLength)
+                            maxQueueLength = queue.Count;
+                    }
 
                     // update data grid view
                     customerGrid.Rows.Add(customersCount + 1, row.RandomInterArrival, row.InterArrival, row.ArrivalTime, row.RandomService, row.StartTime, row.ServiceTime, row.EndTime, row.TimeInQueue, row.AssignedServer.ID);
@@ -284,13 +302,7 @@ namespace MultiQueueSimulation
                     customersCount++;
                 }
                 else 
-                    return;
-                    
-
-                crs++; // testing
-                cst++; // testing
-                cia++; // testing
-                cra++; // testing
+                    break;                  
             }
 
             // set final system performance measuers
@@ -301,7 +313,8 @@ namespace MultiQueueSimulation
             // set final servers perfomance
             foreach (var server in sys.Servers)
             {
-                server.AverageServiceTime = (decimal)server.totalServiceTime / server.noOfCustomers;
+                if(server.noOfCustomers != 0)
+                    server.AverageServiceTime = (decimal)server.totalServiceTime / server.noOfCustomers;
                 server.Utilization = (decimal)server.totalServiceTime / totalSimulationTime;
             }
         }

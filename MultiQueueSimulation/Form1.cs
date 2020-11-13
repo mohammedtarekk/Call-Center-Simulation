@@ -27,7 +27,6 @@ namespace MultiQueueSimulation
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
         }
 
         private void ok_btn_Click(object sender, EventArgs e)
@@ -40,6 +39,11 @@ namespace MultiQueueSimulation
                 customerGrid.Rows.Clear();
 
                 initialize_inputs();
+                //sys.CalculateCummProbabilty();
+                //MessageBox.Show(get_Range(sys.Servers[0].TimeDistribution, 20).ToString());
+                //MessageBox.Show(get_Range(sys.Servers[0].TimeDistribution, 30).ToString());
+                //MessageBox.Show(get_Range(sys.Servers[0].TimeDistribution, 70).ToString());
+                //MessageBox.Show(get_Range(sys.Servers[0].TimeDistribution, 90).ToString());
                 start_process();
             }
             catch (Exception ex)
@@ -58,9 +62,20 @@ namespace MultiQueueSimulation
             return list;
         }
 
+        /// <summary>
+        /// gets the interarrival time of a given number buy checking its comulative prob range.
+        /// </summary>
+        /// <param name="t">Time Distribution List</param>
+        /// <param name="n">The Random Digit</param>
+        /// <returns>Interarrival time</returns>
         public int get_Range(List<TimeDistribution> t, int n)
         {
             // TODO
+            foreach (TimeDistribution timeDistribution in t)
+            {
+                if (n <= timeDistribution.MaxRange && n >= timeDistribution.MinRange)
+                    return timeDistribution.Time;
+            }
             return 0;
         }
 

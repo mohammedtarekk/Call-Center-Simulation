@@ -98,3 +98,17 @@ E:\College\Forth Year\Modeling and Simulation\Tasks\Task 1\Template_Students\Mul
 E:\College\Forth Year\Modeling and Simulation\Tasks\Task 1\Template_Students\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.exe
 E:\College\Forth Year\Modeling and Simulation\Tasks\Task 1\Template_Students\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.pdb
 E:\College\Forth Year\Modeling and Simulation\Tasks\Task 1\Template_Students\MultiQueueSimulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.Form2.resources
+C:\Users\youss\source\repos\mohammedtarekk\Call-Center-Simulation\MultiQueueSimulation\bin\Debug\MultiQueueSimulation.exe.config
+C:\Users\youss\source\repos\mohammedtarekk\Call-Center-Simulation\MultiQueueSimulation\bin\Debug\MultiQueueSimulation.exe
+C:\Users\youss\source\repos\mohammedtarekk\Call-Center-Simulation\MultiQueueSimulation\bin\Debug\MultiQueueSimulation.pdb
+C:\Users\youss\source\repos\mohammedtarekk\Call-Center-Simulation\MultiQueueSimulation\bin\Debug\MultiQueueModels.dll
+C:\Users\youss\source\repos\mohammedtarekk\Call-Center-Simulation\MultiQueueSimulation\bin\Debug\MultiQueueModels.pdb
+C:\Users\youss\source\repos\mohammedtarekk\Call-Center-Simulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.csprojAssemblyReference.cache
+C:\Users\youss\source\repos\mohammedtarekk\Call-Center-Simulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.Form1.resources
+C:\Users\youss\source\repos\mohammedtarekk\Call-Center-Simulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.Form2.resources
+C:\Users\youss\source\repos\mohammedtarekk\Call-Center-Simulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.Properties.Resources.resources
+C:\Users\youss\source\repos\mohammedtarekk\Call-Center-Simulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.csproj.GenerateResource.cache
+C:\Users\youss\source\repos\mohammedtarekk\Call-Center-Simulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.csproj.CoreCompileInputs.cache
+C:\Users\youss\source\repos\mohammedtarekk\Call-Center-Simulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.csproj.CopyComplete
+C:\Users\youss\source\repos\mohammedtarekk\Call-Center-Simulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.exe
+C:\Users\youss\source\repos\mohammedtarekk\Call-Center-Simulation\MultiQueueSimulation\obj\Debug\MultiQueueSimulation.pdb

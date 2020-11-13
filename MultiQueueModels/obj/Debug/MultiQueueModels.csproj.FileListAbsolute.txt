@@ -40,3 +40,9 @@ E:\College\Forth Year\Modeling and Simulation\Tasks\Task 1\Template_Students\Mul
 E:\College\Forth Year\Modeling and Simulation\Tasks\Task 1\Template_Students\MultiQueueSimulation\MultiQueueModels\obj\Debug\MultiQueueModels.csproj.CoreCompileInputs.cache
 E:\College\Forth Year\Modeling and Simulation\Tasks\Task 1\Template_Students\MultiQueueSimulation\MultiQueueModels\obj\Debug\MultiQueueModels.dll
 E:\College\Forth Year\Modeling and Simulation\Tasks\Task 1\Template_Students\MultiQueueSimulation\MultiQueueModels\obj\Debug\MultiQueueModels.pdb
+C:\Users\youss\source\repos\mohammedtarekk\Call-Center-Simulation\MultiQueueModels\bin\Debug\MultiQueueModels.dll
+C:\Users\youss\source\repos\mohammedtarekk\Call-Center-Simulation\MultiQueueModels\bin\Debug\MultiQueueModels.pdb
+C:\Users\youss\source\repos\mohammedtarekk\Call-Center-Simulation\MultiQueueModels\obj\Debug\MultiQueueModels.csprojAssemblyReference.cache
+C:\Users\youss\source\repos\mohammedtarekk\Call-Center-Simulation\MultiQueueModels\obj\Debug\MultiQueueModels.csproj.CoreCompileInputs.cache
+C:\Users\youss\source\repos\mohammedtarekk\Call-Center-Simulation\MultiQueueModels\obj\Debug\MultiQueueModels.dll
+C:\Users\youss\source\repos\mohammedtarekk\Call-Center-Simulation\MultiQueueModels\obj\Debug\MultiQueueModels.pdb

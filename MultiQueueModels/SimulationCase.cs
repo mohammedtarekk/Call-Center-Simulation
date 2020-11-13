@@ -8,12 +8,10 @@ namespace MultiQueueModels
 {
     public class SimulationCase
     {
-        public static int customersCount = -1;
         public SimulationCase()
         {
             this.AssignedServer = new Server();
             this.TimeInQueue = 0;
-            customersCount++;
         }
 
         public int CustomerNumber { get; set; }

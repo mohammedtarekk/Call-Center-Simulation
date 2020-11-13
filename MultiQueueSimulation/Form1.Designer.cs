@@ -54,9 +54,11 @@
             this.serviceDistProbability = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labl7 = new System.Windows.Forms.Label();
             this.interarrivalDist_grid = new System.Windows.Forms.DataGridView();
-            this.ok_btn = new System.Windows.Forms.Button();
             this.InterarivalDistTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.interarrivalDistProbability = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ok_btn = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.customerGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.serviceDist_grid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.interarrivalDist_grid)).BeginInit();
@@ -270,16 +272,6 @@
             this.interarrivalDist_grid.Size = new System.Drawing.Size(295, 150);
             this.interarrivalDist_grid.TabIndex = 11;
             // 
-            // ok_btn
-            // 
-            this.ok_btn.Location = new System.Drawing.Point(391, 463);
-            this.ok_btn.Name = "ok_btn";
-            this.ok_btn.Size = new System.Drawing.Size(151, 43);
-            this.ok_btn.TabIndex = 13;
-            this.ok_btn.Text = "GO";
-            this.ok_btn.UseVisualStyleBackColor = true;
-            this.ok_btn.Click += new System.EventHandler(this.ok_btn_Click);
-            // 
             // InterarivalDistTime
             // 
             this.InterarivalDistTime.HeaderText = "Time";
@@ -292,11 +284,43 @@
             this.interarrivalDistProbability.Name = "interarrivalDistProbability";
             this.interarrivalDistProbability.Width = 140;
             // 
+            // ok_btn
+            // 
+            this.ok_btn.Location = new System.Drawing.Point(267, 463);
+            this.ok_btn.Name = "ok_btn";
+            this.ok_btn.Size = new System.Drawing.Size(151, 43);
+            this.ok_btn.TabIndex = 13;
+            this.ok_btn.Text = "Start System";
+            this.ok_btn.UseVisualStyleBackColor = true;
+            this.ok_btn.Click += new System.EventHandler(this.ok_btn_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(581, 463);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(151, 43);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Test";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(424, 463);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(151, 43);
+            this.button2.TabIndex = 15;
+            this.button2.Text = "Measure Performance";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(926, 518);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.ok_btn);
             this.Controls.Add(this.labl7);
             this.Controls.Add(this.interarrivalDist_grid);
@@ -354,6 +378,8 @@
         private System.Windows.Forms.Button ok_btn;
         private System.Windows.Forms.DataGridViewTextBoxColumn InterarivalDistTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn interarrivalDistProbability;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 

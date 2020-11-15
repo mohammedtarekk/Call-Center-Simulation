@@ -28,13 +28,21 @@ namespace MultiQueueSimulation
             // servers performance
             foreach(var server in Form1.sys.Servers)
                 perf_dgv.Rows.Add(server.ID, server.IdleProbability, server.AverageServiceTime, server.Utilization);
-
-            // chart
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            Form3 chartForm;
+            SimulationSystem.currentGeneratedChart = -1;
+            foreach (var server in Form1.sys.Servers)
+            {
+                if(server.noOfCustomers != 0)
+                {
+                    chartForm = new Form3();
+                    SimulationSystem.currentGeneratedChart++;
+                    chartForm.Show();
+                }             
+            }
         }
     }
 }

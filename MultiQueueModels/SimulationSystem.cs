@@ -14,6 +14,7 @@ namespace MultiQueueModels
             this.InterarrivalDistribution = new List<TimeDistribution>();
             this.PerformanceMeasures = new PerformanceMeasures();
             this.SimulationTable = new List<SimulationCase>();
+            SimulationSystem.currentGeneratedChart = -1;
         }
 
         ///////////// INPUTS ///////////// 
@@ -27,7 +28,8 @@ namespace MultiQueueModels
         public string selectionMethod = null;
         public string stoppingCase = null;
         public int HP = 0;
- 
+        public static int currentGeneratedChart;    
+
         ///////////// OUTPUTS /////////////
         public List<SimulationCase> SimulationTable { get; set; }
         public PerformanceMeasures PerformanceMeasures { get; set; }

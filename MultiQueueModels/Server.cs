@@ -14,6 +14,9 @@ namespace MultiQueueModels
             this.currentEnd = 0;
             this.noOfCustomers = 0;
             this.totalServiceTime = 0;
+            this.idleTime = 0;
+            this.serverCustomers = new List<SimulationCase>();
+            this.workingHours = new List<int>();
         }
 
         public int ID { get; set; }
@@ -26,6 +29,9 @@ namespace MultiQueueModels
         public int currentEnd;
         public int noOfCustomers;
         public int totalServiceTime;
+        public int idleTime;
+        public List<SimulationCase> serverCustomers;
+        public List<int> workingHours;
 
         //optional if needed use them
         public int FinishTime { get; set; }

@@ -31,8 +31,6 @@ namespace MultiQueueSimulation
 
         private void ok_btn_Click(object sender, EventArgs e)
         {
-            try
-            {
                 sys = new SimulationSystem();
                 customersCount = 0;
                 rand = new Random();
@@ -40,11 +38,6 @@ namespace MultiQueueSimulation
 
                 initialize_inputs();
                 start_process();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
 
         public List<KeyValuePair<string, int>> GetEnumList<T>()
@@ -149,7 +142,7 @@ namespace MultiQueueSimulation
             int NoOfCustomerWhoWaited = 0;
             List<SimulationCase> queue = new List<SimulationCase>();
 
-            while ((sys.stoppingCase == "NumberOfCustomers" && customersCount < sys.StoppingNumber) | (sys.stoppingCase == "SimulationEndTime" && lastEndTime < sys.StoppingNumber))
+            while ((sys.stoppingCase == "NumberOfCustomers" && customersCount < sys.StoppingNumber) || (sys.stoppingCase == "SimulationEndTime" && lastEndTime < sys.StoppingNumber))
             {
                 // generate a new customer
                 row = new SimulationCase();
@@ -166,7 +159,6 @@ namespace MultiQueueSimulation
                         row.AssignedServer = sys.Servers[random];
                     }
                     row.RandomInterArrival = 1;
-
                 }
                 else // the rest of the customers
                 {
@@ -213,9 +205,6 @@ namespace MultiQueueSimulation
                                 // performance calculations
                                 NoOfCustomerWhoWaited++;
                                 totalWaitingTime += row.TimeInQueue;
-
-                                //sys.Servers[server_id - 1].IdleProbability += row.TimeInQueue;
-
                             }
                         }
                     }
@@ -252,11 +241,7 @@ namespace MultiQueueSimulation
 
                             // performance calculations
                             NoOfCustomerWhoWaited++;
-                            totalWaitingTime += row.TimeInQueue;
-
-                            //sys.Servers[server_id - 1].IdleProbability += row.TimeInQueue;
-
-                            
+                            totalWaitingTime += row.TimeInQueue;                            
                         }
                     }
 
@@ -267,16 +252,22 @@ namespace MultiQueueSimulation
                 row.StartTime = row.ArrivalTime + row.TimeInQueue;
                 row.EndTime = row.ServiceTime + row.StartTime;
                 sys.Servers[row.AssignedServer.ID - 1].currentEnd = row.EndTime;
-                lastEndTime = row.EndTime;
+                lastEndTime = row.EndTime;              
 
-                
+                // chart calculations
+                // add the current working houers to this server
+                for(int i = row.StartTime; i <row.EndTime; i++)
+                        sys.Servers[row.AssignedServer.ID - 1].workingHours.Add(i);                    
 
-                if (sys.stoppingCase == "NumberOfCustomers" | (sys.stoppingCase == "SimulationEndTime" && lastEndTime <= sys.StoppingNumber))
+
+                if (sys.stoppingCase == "NumberOfCustomers" || (sys.stoppingCase == "SimulationEndTime" && lastEndTime <= sys.StoppingNumber))
                 {
                     // performance calculations
                     sys.Servers[row.AssignedServer.ID - 1].totalServiceTime += row.ServiceTime;
                     sys.Servers[row.AssignedServer.ID - 1].noOfCustomers++;
-                    totalSimulationTime = lastEndTime;
+                    sys.Servers[row.AssignedServer.ID - 1].serverCustomers.Add(row);
+                    if(lastEndTime > totalSimulationTime)
+                        totalSimulationTime = lastEndTime;
 
                     // this code is to calculate maximum queue length
                     if (row.TimeInQueue > 0)
@@ -315,13 +306,33 @@ namespace MultiQueueSimulation
             {
                 if(server.noOfCustomers != 0)
                     server.AverageServiceTime = (decimal)server.totalServiceTime / server.noOfCustomers;
+
                 server.Utilization = (decimal)server.totalServiceTime / totalSimulationTime;
+
+                // set idle time for each server
+                if (server.serverCustomers.Count == 0)
+                    server.idleTime = totalSimulationTime;
+
+                for(int i = 0; i < server.serverCustomers.Count; i++)
+                {
+                    if (i == 0)
+                        server.idleTime += sys.SimulationTable[0].ArrivalTime + server.serverCustomers[i].StartTime;
+
+                    if ((i == server.serverCustomers.Count - 1) && (server.serverCustomers[i].EndTime != totalSimulationTime))
+                        server.idleTime += Math.Abs(totalSimulationTime - server.serverCustomers[i].EndTime);                        
+                    
+                    if(i == server.serverCustomers.Count - 1)
+                        break;
+
+                    server.idleTime += Math.Abs(server.serverCustomers[i].EndTime - server.serverCustomers[i+1].StartTime);
+                }
+                server.IdleProbability = (decimal)server.idleTime / totalSimulationTime;
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string result = TestingManager.Test(sys, Constants.FileNames.TestCase1);
+            string result = TestingManager.Test(sys, Constants.FileNames.TestCase2);
             MessageBox.Show(result);
         }
 
